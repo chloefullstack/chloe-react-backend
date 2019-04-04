@@ -136,7 +136,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# dafsdf
+# dafsdf ++++
 CORS_ALLOW_METHODS = (
     'DELETE',
     'GET',
