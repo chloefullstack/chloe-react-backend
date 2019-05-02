@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import PuppyInfoListView, PuppyInfoDetailView,PuppyInfoCreateView
+from .views import PuppyInfoListView, PuppyInfoDetailView, PuppyInfoCreateView
+    
 
 app_name = 'york'
 urlpatterns = [

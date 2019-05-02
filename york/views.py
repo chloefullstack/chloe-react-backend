@@ -1,7 +1,10 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from .models import PuppyInfo
-from .serializers import PuppyInfoSerializer
-
+from .serializers import PuppyInfoSerializer, CreatePuppyInfoSerializer
+from rest_framework.decorators import action
+from rest_framework import renderers, serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 class PuppyInfoListView(ListAPIView):
     queryset = PuppyInfo.objects.all()
@@ -13,26 +16,25 @@ class PuppyInfoDetailView(RetrieveAPIView):
 
 class PuppyInfoCreateView(CreateAPIView):
     queryset = PuppyInfo.objects.all()
-    serializer_class = PuppyInfoSerializer
+    serializer_class = CreatePuppyInfoSerializer
     # permission_classes = (permissions.IsAuthenticated)
+    def post(self, request, format = None):
+        serializer = CreatePuppyInfoSerializer
 
-# def createInfo(request):
-#     try:
-#         name = request.POST.get('name')
-#         age = request.POST.get('age')
-#         sex = request.POST.get('sex')
-#         description = request.POST.get('description')
-#         updated_at = request.POST.get('updated_at')
+        serializer['age'] = 12
+        serializer.save()
+        return serializer
+# class PuppyInfoList(APIView):
 
-#         post_info = Posts(
-#             name = name,
-#             age = age,
-#             sex = sex,
-#             description = description,
-#             updated_at = updated_at
-#         )
-#         post_info.save()
+#     def get(self, request, format = None):
+#         puppyInfo = PuppyInfo.objects.all()
+#         serializer = CreatePuppyInfoSerializer(puppyInfo, many=True)
+#         return Response(serializer.data)
+#     def post(self, request, format = None):
+#         serializer = CreatePuppyInfoSerializer(data = request.data)
+    
+#         if serializer.is_valid():
+#             serializer['age'] = 12
+#             serializer.save()
 
-#     except Exception as e:
-#         print(e)
-#         return HttpResponse("Failed")
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

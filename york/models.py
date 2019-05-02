@@ -12,7 +12,3 @@ class PuppyInfo(models.Model):
     def __str__(self):
         return self.name
 
-    
-    def save(self, *args, **kwargs):
-        self.age = int(self.age) * 10
-        super(PuppyInfo,self).save(*args, **kwargs)
