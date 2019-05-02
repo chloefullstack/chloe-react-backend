@@ -1,4 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import PuppyInfo
 from .serializers import PuppyInfoSerializer, CreatePuppyInfoSerializer
 from rest_framework.decorators import action
@@ -21,10 +23,29 @@ class PuppyInfoCreateView(CreateAPIView):
     def post(self, request, format = None):
         serializer = CreatePuppyInfoSerializer
 
+<<<<<<< HEAD
         serializer['age'] = 12
         serializer.save()
         return serializer
 # class PuppyInfoList(APIView):
+=======
+#我们可以用这种方法去 手动接收 request
+@api_view(['POST'])
+def snippet_list(request):
+    serializer = PuppyInfoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# def createInfo(request):
+#     try:
+#         name = request.POST.get('name')
+#         age = request.POST.get('age')
+#         sex = request.POST.get('sex')
+#         description = request.POST.get('description')
+#         updated_at = request.POST.get('updated_at')
+>>>>>>> d194a7b31b93e27fec547caac6f5881ac03b53bb
 
 #     def get(self, request, format = None):
 #         puppyInfo = PuppyInfo.objects.all()

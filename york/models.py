@@ -11,4 +11,11 @@ class PuppyInfo(models.Model):
 
     def __str__(self):
         return self.name
+<<<<<<< HEAD
 
+=======
+    
+    def save(self, *args, **kwargs):
+        self.age = int(self.age) * 10
+        super(PuppyInfo,self).save(*args, **kwargs)
+>>>>>>> d194a7b31b93e27fec547caac6f5881ac03b53bb
